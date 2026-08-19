@@ -5,6 +5,7 @@ export default function VendorDashboard() {
   const [spaces, setSpaces] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0); 
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,24 +16,32 @@ export default function VendorDashboard() {
   const [description, setDescription] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  // Load Data Space milik Vendor
-  const fetchVendorSpaces = async () => {
-    try {
-      setLoading(true);
-      const res = await api.get('/spaces');
-      setSpaces(res.data?.results || res.data || []);
-    } catch (err) {
-      setError('Gagal memuat daftar space.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+ 
   useEffect(() => {
-    fetchVendorSpaces();
-  }, []);
+    let isMounted = true;
 
-  // Handle Submit Tambah Space Baru
+    api
+      .get('/spaces')
+      .then((res) => {
+        if (isMounted) {
+          setSpaces(res.data?.results || res.data || []);
+          setError('');
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setError('Gagal memuat daftar space.');
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [refreshKey]);
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitLoading(true);
@@ -45,14 +54,14 @@ export default function VendorDashboard() {
         description,
       });
 
-      
+  
       setName('');
       setAddress('');
       setCapacity('');
       setPricePerHour('');
       setDescription('');
       setIsModalOpen(false);
-      fetchVendorSpaces();
+      setRefreshKey((prev) => prev + 1);
     } catch (err) {
       const errMsg =
         err.response?.data?.message || 'Gagal menambahkan space baru.';
@@ -64,6 +73,7 @@ export default function VendorDashboard() {
 
   return (
     <div className="space-y-6">
+      {/* Header & Tombol Tambah */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-base-100 p-6 rounded-2xl shadow-sm">
         <div>
           <h1 className="text-2xl font-bold">Dashboard Vendor</h1>
@@ -80,11 +90,11 @@ export default function VendorDashboard() {
         </button>
       </div>
 
-    
+  
       {loading && <div className="text-center py-8">Memuat data...</div>}
       {error && <div className="alert alert-error text-sm mb-4">{error}</div>}
 
-    
+  
       {!loading && !error && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {spaces.length === 0 ? (
