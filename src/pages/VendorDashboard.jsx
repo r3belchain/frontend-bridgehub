@@ -73,7 +73,7 @@ export default function VendorDashboard() {
 
   return (
     <div className="space-y-6">
-      {/* Header & Tombol Tambah */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-base-100 p-6 rounded-2xl shadow-sm">
         <div>
           <h1 className="text-2xl font-bold">Dashboard Vendor</h1>
