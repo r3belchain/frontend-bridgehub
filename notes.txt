@@ -1,0 +1,12 @@
+Nama: Alex Gordo
+Email: alexgordo@gmail.com
+Pass: alexgordo123
+Role: Customer
+
+
+Nama: John Doe
+Email: johndoe@gmail.com
+Pass: johndoe123
+Role: Vendor
+
+
