@@ -1,10 +1,18 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import VendorDashboard from './pages/VendorDashboard';
-import ProtectedRoute from "./routes/ProtectedRoute";
-import AdminAmenities from './pages/AdminAmenities';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
+import AdminAmenities from './pages/AdminAmenities';
+import CustomerReservations from './pages/CustomerReservations';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import SpaceDetail from './pages/SpaceDetail';
+import Spaces from './pages/Spaces';
+import VendorDashboard from './pages/VendorDashboard';
+import VendorReservations from './pages/VendorReservations';
+import AdminUsers from './pages/AdminUsers';
+import ProtectedRoute from './routes/ProtectedRoute';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminSpaces from './pages/AdminSpaces';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -13,38 +21,36 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route
-          element={
-            <ProtectedRoute allowedRoles={['CUSTOMER', 'VENDOR', 'ADMIN']} />
-          }
-        >
-          <Route element={<MainLayout />}>
+        <Route element={<MainLayout />}>
+          <Route path="/spaces" element={<Spaces />} />
+          <Route path="/spaces/:id" element={<SpaceDetail />} />
+
+          <Route element={<ProtectedRoute allowedRoles={['CUSTOMER']} />}>
             <Route
-              path="/spaces"
-              element={
-                <div className="card bg-base-100 shadow-xl p-6">
-                  <h1 className="text-2xl font-bold">Katalog Space</h1>
-                  <p className="mt-2 text-gray-600">
-                    Daftar tempat coworking space akan dimuat di sini.
-                  </p>
-                </div>
-              }
+              path="/customer/reservations"
+              element={<CustomerReservations />}
             />
           </Route>
-        </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={['VENDOR', 'ADMIN']} />}>
-          <Route element={<MainLayout />}>
+          <Route
+            element={<ProtectedRoute allowedRoles={['VENDOR', 'ADMIN']} />}
+          >
             <Route path="/vendor/dashboard" element={<VendorDashboard />} />
+            <Route
+              path="/vendor/reservations"
+              element={<VendorReservations />}
+            />
+          </Route>
+
+          <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/amenities" element={<AdminAmenities />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/spaces" element={<AdminSpaces />} />
           </Route>
         </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
-          <Route path="/admin/amenities" element={<AdminAmenities />} />
-        </Route>
-
-        <Route path="*" element={<Navigate to="/login" replace />} />
-
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

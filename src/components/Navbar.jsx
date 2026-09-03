@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
@@ -7,11 +7,13 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/login");
+    navigate('/login');
   };
 
   const getDashboardPath = () => {
-    return user && user.role === "VENDOR" ? "/vendor/dashboard" : "/spaces";
+    if (user?.role === 'VENDOR') return '/vendor/dashboard';
+    if (user?.role === 'ADMIN') return '/admin/dashboard';
+    return '/spaces';
   };
 
   return (
@@ -21,7 +23,7 @@ export default function Navbar() {
           to={getDashboardPath()}
           className="btn btn-ghost text-xl font-bold"
         >
-          {"Bridge Hub"}
+          {'Bridge Hub Space'}
         </Link>
       </div>
       <div className="flex-none gap-2">
@@ -34,7 +36,7 @@ export default function Navbar() {
             >
               <div className="bg-neutral text-neutral-content w-10 rounded-full">
                 <span className="text-xs uppercase">
-                  {user && user.name ? user.name[0] : "U"}
+                  {user && user.name ? user.name[0] : 'U'}
                 </span>
               </div>
             </div>
@@ -44,24 +46,67 @@ export default function Navbar() {
             >
               <li className="menu-title px-4 py-2">
                 <span className="font-semibold text-base-content">
-                  {user && user.name ? user.name : "User"}
+                  {user && user.name ? user.name : 'User'}
                 </span>
                 <span className="text-xs text-gray-500 font-normal">
-                  {user && user.email ? user.email : ""}
+                  {user && user.email ? user.email : ''}
                 </span>
                 <span className="badge badge-sm badge-outline mt-1">
-                  {user && user.role ? user.role : "GUEST"}
+                  {user && user.role ? user.role : 'GUEST'}
                 </span>
               </li>
               <div className="divider my-0"></div>
-              {user && user.role === "VENDOR" && (
+
+              {/* Menu Khusus Admin */}
+              {user && user.role === 'ADMIN' && (
+                <>
+                  <li>
+                    <Link to="/admin/dashboard" className="font-bold">
+                      {'Dashboard Admin'}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/users">{'Manajemen Pengguna'}</Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/amenities">
+                      {'Fasilitas'}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/spaces" className="text-error">
+                      {'Moderasi Space'}
+                    </Link>
+                  </li>
+                </>
+              )}
+
+              {/* Menu Khusus Vendor */}
+              {user && user.role === 'VENDOR' && (
+                <>
+                  <li>
+                    <Link to="/vendor/dashboard">{'Dashboard Vendor'}</Link>
+                  </li>
+                  <li>
+                    <Link to="/vendor/reservations">
+                      {'Kelola Pesanan Masuk'}
+                    </Link>
+                  </li>
+                </>
+              )}
+
+              {/* Menu Khusus Customer */}
+              {user && user.role === 'CUSTOMER' && (
                 <li>
-                  <Link to="/vendor/dashboard">{"Dashboard Vendor"}</Link>
+                  <Link to="/customer/reservations">{'Pesanan Saya'}</Link>
                 </li>
               )}
+
+              {/* Publik */}
               <li>
-                <Link to="/spaces">{"Katalog Spaces"}</Link>
+                <Link to="/spaces">{'Katalog Spaces'}</Link>
               </li>
+
               <div className="divider my-0"></div>
               <li>
                 <button
@@ -69,7 +114,7 @@ export default function Navbar() {
                   onClick={handleLogout}
                   className="text-error"
                 >
-                  {"Logout"}
+                  {'Logout'}
                 </button>
               </li>
             </ul>
@@ -77,10 +122,10 @@ export default function Navbar() {
         ) : (
           <div className="flex gap-2">
             <Link to="/login" className="btn btn-ghost btn-sm">
-              {"Masuk"}
+              {'Masuk'}
             </Link>
             <Link to="/register" className="btn btn-primary btn-sm">
-              {"Daftar"}
+              {'Daftar'}
             </Link>
           </div>
         )}
