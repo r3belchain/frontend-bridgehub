@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VendorDashboard from './pages/VendorDashboard';
 import ProtectedRoute from "./routes/ProtectedRoute";
+import AdminAmenities from './pages/AdminAmenities';
 import MainLayout from './layouts/MainLayout';
 
 function App() {
@@ -38,9 +39,12 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
+          <Route path="/admin/amenities" element={<AdminAmenities />} />
+        </Route>
 
         <Route path="*" element={<Navigate to="/login" replace />} />
+
       </Routes>
     </BrowserRouter>
   );
