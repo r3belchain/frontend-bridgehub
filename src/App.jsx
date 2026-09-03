@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AdminAmenities from './pages/AdminAmenities';
 import CustomerReservations from './pages/CustomerReservations';
@@ -12,7 +12,9 @@ import AdminUsers from './pages/AdminUsers';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminSpaces from './pages/AdminSpaces';
+import ForgotPassword from './pages/ForgotPassword';
 import NotFound from './pages/NotFound';
+import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route element={<MainLayout />}>
           <Route path="/spaces" element={<Spaces />} />

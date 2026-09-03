@@ -69,6 +69,12 @@ export default function Login() {
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
+                <Link
+                  to="/forgot-password"
+                  className="label-text-alt link link-hover text-primary"
+                >
+                  Lupa password?
+                </Link>
               </label>
               <input
                 type="password"
@@ -85,14 +91,14 @@ export default function Login() {
               className="btn btn-primary w-full mt-6"
               disabled={loading}
             >
-              {loading ? "Memproses..." : "Masuk"}
+              {loading ? 'Memproses...' : 'Masuk'}
             </button>
           </form>
 
           <div className="divider my-4">ATAU</div>
 
           <p className="text-center text-sm">
-            Belum punya akun?{" "}
+            Belum punya akun?{' '}
             <Link to="/register" className="link link-primary font-semibold">
               Daftar Sekarang
             </Link>

@@ -9,7 +9,7 @@ export default function NotFound() {
         <p className="text-gray-500 max-w-md mx-auto">
           URL yang Anda tuju entah dibawa ke mana. 
         </p>
-        <Link to="/" className="btn btn-primary text-white mt-4">
+        <Link to="/login" className="btn btn-primary text-white mt-4">
          Kembali ke Pelukan Beranda
         </Link>
       </div>

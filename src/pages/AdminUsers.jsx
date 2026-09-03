@@ -44,8 +44,8 @@ export default function AdminUsers() {
     }
 
     if (
-      !window.confirm(
-        'PERINGATAN BAHAYA: Yakin ingin menghapus user ini secara permanen? Semua data terkait (space/reservasi) mungkin akan ikut terhapus atau error.'
+        !window.confirm(
+          'Yakin ingin menghapus user ini secara permanen? Semua data terkait mungkin akan ikut terhapus atau error.'
       )
     ) {
       return;

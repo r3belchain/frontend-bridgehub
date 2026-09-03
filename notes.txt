@@ -1,5 +1,5 @@
 Nama: Alex Gordo
-Email: alexgordo@gmail.com
+Email:  
 Pass: alexgordo123
 Role: Customer
 
