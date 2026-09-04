@@ -3,10 +3,10 @@ This is the frontend application for the Coworking Space booking and management 
 
 ## Tech Stack
 
-*   **Framework:** React + Vite (for lightning-fast HMR and building)
+*   **Framework:** React + Vite 
 *   **Styling:** Tailwind CSS + DaisyUI
 *   **Routing:** React Router Dom
-*   **API Client:** Axios (with custom interceptors for JWT handling)
+*   **API Client:** Axios 
 *   **Deployment:** Vercel
 
 ## Key Features
