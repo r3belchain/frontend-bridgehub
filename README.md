@@ -19,29 +19,29 @@ This is the frontend application for the Coworking Space booking and management 
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
+Clone the repository:
+```
    git clone [https://github.com/yourusername/frontend-coworkingspace.git](https://github.com/yourusername/frontend-coworkingspace.git)
 
 ```
 
-2. Navigate to the project directory and install dependencies:
-```bash
+Navigate to the project directory and install dependencies:
+```
 cd frontend-coworkingspace
 npm install
 
 ```
 
 
-3. Create a `.env` file in the root directory and add your API URL:
-```env
+Create a `.env` file in the root directory and add your API URL:
+```
 VITE_API_URL=http://localhost:3000/v1
 
 ```
 
 
-4. Start the development server:
-```bash
+Start the development server:
+```
 npm run dev
 
 ```
