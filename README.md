@@ -21,7 +21,7 @@ This is the frontend application for the Coworking Space booking and management 
 
 Clone the repository:
 ```
-   git clone [https://github.com/yourusername/frontend-coworkingspace.git](https://github.com/yourusername/frontend-coworkingspace.git)
+git clone [https://github.com/yourusername/frontend-coworkingspace.git](https://github.com/yourusername/frontend-coworkingspace.git)
 
 ```
 
