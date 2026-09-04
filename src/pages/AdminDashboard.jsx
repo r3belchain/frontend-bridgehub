@@ -90,7 +90,7 @@ export default function AdminDashboard() {
               </div>
               <div className="stat-title">Total Reservasi</div>
               <div className="stat-value text-accent">
-                {stats.totalReservations}
+                {stats.totalReservations} 
               </div>
               <div className="stat-desc">Semua status tiket</div>
             </div>

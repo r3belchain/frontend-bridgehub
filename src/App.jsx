@@ -1,27 +1,30 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import AdminAmenities from './pages/AdminAmenities';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminSpaces from './pages/AdminSpaces';
+import AdminUsers from './pages/AdminUsers';
 import CustomerReservations from './pages/CustomerReservations';
+import ForgotPassword from './pages/ForgotPassword';
 import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import Register from './pages/Register';
+import ResetPassword from './pages/ResetPassword';
 import SpaceDetail from './pages/SpaceDetail';
 import Spaces from './pages/Spaces';
 import VendorDashboard from './pages/VendorDashboard';
 import VendorReservations from './pages/VendorReservations';
-import AdminUsers from './pages/AdminUsers';
 import ProtectedRoute from './routes/ProtectedRoute';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminSpaces from './pages/AdminSpaces';
-import ForgotPassword from './pages/ForgotPassword';
-import NotFound from './pages/NotFound';
-import ResetPassword from './pages/ResetPassword';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate to="/spaces" replace />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
